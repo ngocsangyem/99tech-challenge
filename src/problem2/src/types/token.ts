@@ -1,9 +1,9 @@
 export type Token = {
-  readonly symbol: string
-  readonly name: string
-  readonly iconUrl: string
+  symbol: string
+  name: string
+  iconUrl: string
 }
 
-export type TokenList = readonly Token[]
+export type TokenList = Token[]
 
 export type TokenSymbol = string

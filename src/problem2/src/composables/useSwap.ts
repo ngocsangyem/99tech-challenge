@@ -140,19 +140,19 @@ export const useSwap = () => {
 
   return {
     // State
-    fromToken: computed(() => fromToken.value),
-    toToken: computed(() => toToken.value),
-    fromAmount: computed(() => fromAmount.value),
-    toAmount: computed(() => toAmount.value),
+    fromToken,
+    toToken,
+    fromAmount,
+    toAmount,
     swapState: computed(() => swapState.value),
-    
+
     // Computed
     formData,
     isValid,
     errors,
     exchangeRate,
     canPerformSwap,
-    
+
     // Actions
     setFromToken,
     setToToken,

@@ -6,7 +6,7 @@
     <div class="relative">
       <Input
         :id="inputId"
-        :model-value="modelValue"
+        v-model="model"
         :placeholder="placeholder"
         :readonly="readonly"
         :class="cn(
@@ -43,16 +43,11 @@ import { Label } from '@/components/ui/label'
 import type { TokenSymbol } from '@/types'
 
 interface Props {
-  modelValue: string
   label: string
   placeholder?: string
   error?: string
   readonly?: boolean
   tokenSymbol?: TokenSymbol | null
-}
-
-interface Emits {
-  (e: 'update:modelValue', value: string): void
 }
 
 const props = withDefaults(defineProps<Props>(), {
@@ -62,35 +57,35 @@ const props = withDefaults(defineProps<Props>(), {
   tokenSymbol: null,
 })
 
-const emit = defineEmits<Emits>()
+const model = defineModel<string>()
 
 const { getPrice } = usePrices()
 
-const inputId = `amount-input-${Math.random().toString(36).substr(2, 9)}`
+const inputId = `amount-input-${Math.random().toString(36).substring(2, 11)}`
 
 const usdValue = computed(() => {
-  if (!props.tokenSymbol || !props.modelValue) return null
-  
-  const amount = parseAmount(props.modelValue)
+  if (!props.tokenSymbol || !model.value) return null
+
+  const amount = parseAmount(model.value)
   const price = getPrice(props.tokenSymbol)
-  
+
   if (amount <= 0 || !price) return null
-  
+
   return amount * price
 })
 
 const handleInput = (event: Event): void => {
   const target = event.target as HTMLInputElement
   const formatted = formatAmountInput(target.value)
-  emit('update:modelValue', formatted)
+  model.value = formatted
 }
 
 const handleBlur = (): void => {
-  if (!props.modelValue) return
-  
-  const amount = parseAmount(props.modelValue)
+  if (!model.value) return
+
+  const amount = parseAmount(model.value)
   if (amount > 0) {
-    emit('update:modelValue', formatNumber(amount, 8))
+    model.value = formatNumber(amount, 8)
   }
 }
 </script>

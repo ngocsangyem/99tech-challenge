@@ -3,10 +3,7 @@
     <Label :for="inputId" class="text-sm font-medium">
       {{ label }}
     </Label>
-    <Select
-      :model-value="modelValue"
-      @update:model-value="handleValueChange"
-    >
+    <Select v-model="model" @update:model-value="searchQuery = ''">
       <SelectTrigger :id="inputId" class="w-full">
         <SelectValue :placeholder="placeholder">
           <div v-if="selectedToken" class="flex items-center gap-2">
@@ -16,7 +13,6 @@
               class="w-5 h-5 rounded-full"
               @error="handleImageError"
             />
-            <span class="font-medium">{{ selectedToken.symbol }}</span>
             <span class="text-muted-foreground text-sm">{{ selectedToken.name }}</span>
           </div>
         </SelectValue>
@@ -59,7 +55,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed, ref } from 'vue'
+import { computed, ref, watch } from 'vue'
 import { useTokens, usePrices } from '@/composables'
 import {
   Select,
@@ -73,15 +69,10 @@ import { Label } from '@/components/ui/label'
 import type { TokenSymbol } from '@/types'
 
 interface Props {
-  modelValue: TokenSymbol | null
   label: string
   placeholder?: string
   error?: string
   excludeToken?: TokenSymbol | null
-}
-
-interface Emits {
-  (e: 'update:modelValue', value: TokenSymbol | null): void
 }
 
 const props = withDefaults(defineProps<Props>(), {
@@ -90,29 +81,29 @@ const props = withDefaults(defineProps<Props>(), {
   excludeToken: null,
 })
 
-const emit = defineEmits<Emits>()
+const model = defineModel<string | null>({ default: null })
 
 const { tokens, getToken } = useTokens()
 const { availableTokens } = usePrices()
 
 const searchQuery = ref('')
-const inputId = `currency-selector-${Math.random().toString(36).substr(2, 9)}`
+const inputId = `currency-selector-${Math.random().toString(36).substring(2, 11)}`
 
 const selectedToken = computed(() => {
-  return props.modelValue ? getToken(props.modelValue) : null
+  return model.value ? getToken(model.value) : null
 })
 
 const filteredTokens = computed(() => {
   const query = searchQuery.value.toLowerCase().trim()
-  
+
   return tokens.value
     .filter((token) => {
       // Only show tokens that have prices
       if (!availableTokens.value.includes(token.symbol)) return false
-      
+
       // Exclude the specified token
       if (props.excludeToken && token.symbol === props.excludeToken) return false
-      
+
       // Filter by search query
       if (query) {
         return (
@@ -120,16 +111,11 @@ const filteredTokens = computed(() => {
           token.name.toLowerCase().includes(query)
         )
       }
-      
+
       return true
     })
     .sort((a, b) => a.symbol.localeCompare(b.symbol))
 })
-
-const handleValueChange = (value: string | null): void => {
-  emit('update:modelValue', value)
-  searchQuery.value = ''
-}
 
 const handleImageError = (event: Event): void => {
   const img = event.target as HTMLImageElement
