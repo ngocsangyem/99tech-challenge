@@ -1,36 +1,36 @@
 import type { TokenSymbol } from './token'
 
 export type SwapFormData = {
-  readonly fromToken: TokenSymbol | null
-  readonly toToken: TokenSymbol | null
-  readonly fromAmount: string
-  readonly toAmount: string
+  fromToken: TokenSymbol | null
+  toToken: TokenSymbol | null
+  fromAmount: string
+  toAmount: string
 }
 
 export type SwapValidationError = {
-  readonly field: keyof SwapFormData
-  readonly message: string
+  field: keyof SwapFormData
+  message: string
 }
 
 export type SwapValidationResult = {
-  readonly isValid: boolean
-  readonly errors: readonly SwapValidationError[]
+  isValid: boolean
+  errors: SwapValidationError[]
 }
 
 export type SwapState = {
-  readonly isLoading: boolean
-  readonly isSubmitting: boolean
-  readonly error: string | null
-  readonly lastSwapTime: Date | null
+  isLoading: boolean
+  isSubmitting: boolean
+  error: string | null
+  lastSwapTime: Date | null
 }
 
 export type SwapTransaction = {
-  readonly id: string
-  readonly fromToken: TokenSymbol
-  readonly toToken: TokenSymbol
-  readonly fromAmount: number
-  readonly toAmount: number
-  readonly exchangeRate: number
-  readonly timestamp: Date
-  readonly status: 'pending' | 'completed' | 'failed'
+  id: string
+  fromToken: TokenSymbol
+  toToken: TokenSymbol
+  fromAmount: number
+  toAmount: number
+  exchangeRate: number
+  timestamp: Date
+  status: 'pending' | 'completed' | 'failed'
 }
