@@ -172,24 +172,6 @@ enum SumMethod {
 }
 ```
 
-## ⚡ Performance Analysis
-
-### Benchmark Results
-
-| Method | Input Size | Avg Time | Complexity |
-|--------|------------|----------|------------|
-| Formula | 1,000,000 | 0.001ms | O(1) |
-| Iterative | 1,000,000 | 2.5ms | O(n) |
-| Recursive | 10,000 | 15ms | O(n) |
-
-### Performance Recommendations
-
-- **Small inputs (n < 100)**: Any method works well
-- **Medium inputs (100 ≤ n < 10,000)**: Formula or iterative
-- **Large inputs (n ≥ 10,000)**: Formula method only
-- **Educational purposes**: Iterative or recursive
-- **Production systems**: Formula method
-
 ## 🧪 Testing
 
 ### Running Tests
