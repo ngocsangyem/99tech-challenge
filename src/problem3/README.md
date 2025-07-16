@@ -35,8 +35,8 @@ interface WalletBalance {
 const sortedBalances = useMemo(() => {
   return balances.filter((balance: WalletBalance) => {
     const balancePriority = getPriority(balance.blockchain);
-    if (lhsPriority > -99) { // ❌ lhsPriority is undefined
-      if (balance.amount <= 0) { // ❌ Wrong logic - shows zero balances
+    if (lhsPriority > -99) { // lhsPriority is undefined
+      if (balance.amount <= 0) { // Wrong logic - shows zero balances
         return true;
       }
     }
@@ -51,7 +51,7 @@ const sortedBalances = useMemo(() => {
     }
     // Missing return statement for equal priorities
   });
-}, [balances, prices]); // ❌ prices not used in computation
+}, [balances, prices]); // prices not used in computation
 ```
 
 ### Refactored (Correct Logic)
@@ -131,11 +131,11 @@ const rows = sortedBalances.map((balance: FormattedWalletBalance, index: number)
   const usdValue = prices[balance.currency] * balance.amount;
   return (
     <WalletRow 
-      className={classes.row} // ❌ classes is undefined
-      key={index} // ❌ Using index as key
+      className={classes.row} // classes is undefined
+      key={index} // Using index as key
       amount={balance.amount}
       usdValue={usdValue}
-      formattedAmount={balance.formatted} // ❌ formatted doesn't exist
+      formattedAmount={balance.formatted} // formatted doesn't exist
     />
   );
 });
@@ -152,14 +152,14 @@ return (
 const rows = useMemo(() => {
   return formattedBalances.map((balance: FormattedWalletBalance) => {
     const price = prices[balance.currency];
-    const usdValue = price ? price * balance.amount : 0; // ✅ Safe calculation
+    const usdValue = price ? price * balance.amount : 0; // Safe calculation
     
     return (
       <WalletRow 
-        key={`${balance.currency}-${balance.blockchain}`} // ✅ Unique key
+        key={`${balance.currency}-${balance.blockchain}`} // Unique key
         amount={balance.amount}
         usdValue={usdValue}
-        formattedAmount={balance.formatted} // ✅ Property exists
+        formattedAmount={balance.formatted} // Property exists
         currency={balance.currency}
       />
     );
@@ -199,9 +199,9 @@ interface Props extends BoxProps {
 }
 
 const WalletPage: React.FC<Props> = (props: Props) => {
-  const { children, ...rest } = props; // ❌ children unused
-  // ❌ Inconsistent formatting
-  // ❌ Missing error handling
+  const { children, ...rest } = props; // children unused
+  // Inconsistent formatting
+  // Missing error handling
 };
 ```
 
@@ -211,7 +211,7 @@ const WalletPage: React.FC<Props> = (props: Props) => {
 type WalletPageProps = BoxProps;
 
 const WalletPage: React.FC<WalletPageProps> = (props) => {
-  const { ...rest } = props; // ✅ Removed unused destructuring
+  const { ...rest } = props; // Removed unused destructuring
   // Consistent formatting
   // Comprehensive error handling
   // Clear variable names
