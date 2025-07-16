@@ -55,7 +55,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed, ref, watch } from 'vue'
+import { computed, ref } from 'vue'
 import { useTokens, usePrices } from '@/composables'
 import {
   Select,
@@ -68,7 +68,7 @@ import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import type { TokenSymbol } from '@/types'
 
-interface Props {
+type Props = {
   label: string
   placeholder?: string
   error?: string

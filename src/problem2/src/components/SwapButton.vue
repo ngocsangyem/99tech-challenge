@@ -27,7 +27,7 @@ import { computed } from 'vue'
 import { Button } from '@/components/ui/button'
 import { ArrowUpDown, Loader2 } from 'lucide-vue-next'
 
-interface Props {
+type Props = {
   isLoading?: boolean
   canSubmit?: boolean
   disabled?: boolean
@@ -35,9 +35,9 @@ interface Props {
   toToken?: string | null
 }
 
-interface Emits {
-  (e: 'swap'): void
-  (e: 'submit'): void
+type Emits = {
+  swap: []
+  submit: []
 }
 
 const props = withDefaults(defineProps<Props>(), {
@@ -54,15 +54,15 @@ const buttonText = computed(() => {
   if (props.isLoading) {
     return 'Swapping...'
   }
-  
+
   if (!props.fromToken || !props.toToken) {
     return 'Select tokens'
   }
-  
+
   if (!props.canSubmit) {
     return 'Enter amount'
   }
-  
+
   return `Swap ${props.fromToken} to ${props.toToken}`
 })
 </script>

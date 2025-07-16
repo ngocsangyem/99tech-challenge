@@ -42,7 +42,7 @@ import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import type { TokenSymbol } from '@/types'
 
-interface Props {
+type Props = {
   label: string
   placeholder?: string
   error?: string
