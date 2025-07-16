@@ -86,7 +86,7 @@ const model = defineModel<string | null>({ default: null });
 const { tokens, getToken } = useTokens();
 const { availableTokens } = usePrices();
 
-const searchQuery = ref();
+const searchQuery = ref('');
 const inputId = `currency-selector-${Math.random().toString(36).substring(2, 11)}`;
 
 const selectedToken = computed(() => {
@@ -94,10 +94,13 @@ const selectedToken = computed(() => {
 });
 
 const filteredTokens = computed(() => {
-  const query = searchQuery.value.toLowerCase().trim();
+  const query = searchQuery.value?.toLowerCase().trim() || '';
 
   return tokens.value
     .filter((token) => {
+      // Ensure token has required properties
+      if (!token || !token.symbol || !token.name) return false;
+
       // Only show tokens that have prices
       if (!availableTokens.value.includes(token.symbol)) return false;
 
@@ -114,7 +117,7 @@ const filteredTokens = computed(() => {
 
       return true;
     })
-    .sort((a, b) => a.symbol.localeCompare(b.symbol));
+    .sort((a, b) => (a.symbol || '').localeCompare(b.symbol || ''));
 });
 
 const handleImageError = (event: Event): void => {
