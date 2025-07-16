@@ -15,7 +15,7 @@ We're cool as long as we can view your solution without any pain.
 - See the [README.md](./src/problem1/README.md)
 
 ### Problem 2
-- Live demo: [https://currency-swap-7jc56dhvh-sagsaggs-projects.vercel.app/](https://currency-swap-7jc56dhvh-sagsaggs-projects.vercel.app/)
+- Live demo: [https://currency-swap-three.vercel.app/](https://currency-swap-three.vercel.app/)
 - See the [README.md](./src/problem2/README.md)
 
 ### Problem 3

@@ -2,7 +2,7 @@
 
 A modern, responsive currency swap application built with Vue 3, TypeScript, and Tailwind CSS.
 
-> Live demo [here](https://currency-swap-7jc56dhvh-sagsaggs-projects.vercel.app/)
+> Live demo [here](https://currency-swap-three.vercel.app/)
 
 ## Features
 
