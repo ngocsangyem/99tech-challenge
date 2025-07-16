@@ -2,7 +2,7 @@
 
 A comprehensive TypeScript implementation of three unique algorithms to calculate the sum of integers from 1 to n, with robust error handling, performance optimization, and extensive testing.
 
-## 📋 Table of Contents
+## Table of Contents
 
 - [Overview](#overview)
 - [Problem Statement](#problem-statement)
@@ -14,7 +14,7 @@ A comprehensive TypeScript implementation of three unique algorithms to calculat
 - [Testing](#testing)
 - [Contributing](#contributing)
 
-## 🎯 Overview
+## Overview
 
 This project provides three distinct algorithmic approaches to solve the classic "sum to n" problem:
 
@@ -24,7 +24,7 @@ This project provides three distinct algorithmic approaches to solve the classic
 
 Each implementation includes comprehensive error handling, input validation, and performance monitoring capabilities.
 
-## 📝 Problem Statement
+## Problem Statement
 
 **Input**: `n` - any integer  
 **Output**: Sum of integers from 1 to n (i.e., `1 + 2 + 3 + ... + n`)
@@ -36,7 +36,7 @@ Each implementation includes comprehensive error handling, input validation, and
 - Input must be a valid integer
 - Negative inputs return 0
 
-## 🚀 Implementations
+## Implementations
 
 ### Implementation A: Iterative Approach
 
@@ -78,7 +78,7 @@ const sum_to_n_c = (n: number): number => {
 - **Best for**: Functional programming, educational recursion examples
 - **Limitation**: Stack overflow risk for large inputs (>10,000)
 
-## 📦 Installation
+## Installation
 
 ```bash
 # Clone the repository
@@ -92,7 +92,7 @@ npm install
 npm run build
 ```
 
-## 💻 Usage
+## Usage
 
 ### Basic Usage
 
@@ -124,7 +124,7 @@ try {
 }
 ```
 
-## 📚 API Reference
+## API Reference
 
 ### Core Functions
 
@@ -172,7 +172,7 @@ enum SumMethod {
 }
 ```
 
-## 🧪 Testing
+## Testing
 
 ### Running Tests
 
