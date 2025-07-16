@@ -1,4 +1,4 @@
-import type { TokenSymbol } from './token'
+import type { TokenSymbol } from './token';
 
 export type SwapFormData = {
   fromToken: TokenSymbol | null

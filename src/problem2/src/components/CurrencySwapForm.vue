@@ -106,24 +106,24 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, type Ref } from 'vue'
-import { useTokens, usePrices, useSwap } from '@/composables'
-import { formatNumber } from '@/utils/calculations'
+import { ref, computed, type Ref } from 'vue';
+import { useTokens, usePrices, useSwap } from '@/composables';
+import { formatNumber } from '@/utils/calculations';
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
-} from '@/components/ui/card'
-import CurrencySelector from './CurrencySelector.vue'
-import AmountInput from './AmountInput.vue'
-import SwapButton from './SwapButton.vue'
-import LoadingSpinner from './LoadingSpinner.vue'
-import type { SwapTransaction } from '@/types'
+} from '@/components/ui/card';
+import CurrencySelector from './CurrencySelector.vue';
+import AmountInput from './AmountInput.vue';
+import SwapButton from './SwapButton.vue';
+import LoadingSpinner from './LoadingSpinner.vue';
+import type { SwapTransaction } from '@/types';
 
-const { isLoading: tokensLoading } = useTokens()
-const { isLoading: pricesLoading } = usePrices()
+const { isLoading: tokensLoading } = useTokens();
+const { isLoading: pricesLoading } = usePrices();
 
 const {
   fromToken,
@@ -137,29 +137,29 @@ const {
   canPerformSwap,
   swapTokens,
   submitSwap,
-} = useSwap()
+} = useSwap();
 
-const lastTransaction: Ref<SwapTransaction | null> = ref(null)
+const lastTransaction: Ref<SwapTransaction | null> = ref(null);
 
-const isLoading = computed(() => tokensLoading.value || pricesLoading.value)
+const isLoading = computed(() => tokensLoading.value || pricesLoading.value);
 
 const getFieldError = (fieldName: string): string => {
-  const error = errors.value.find((err) => err.field === fieldName)
-  return error?.message || ''
-}
+  const error = errors.value.find((err) => err.field === fieldName);
+  return error?.message || '';
+};
 
 const handleSwapTokens = (): void => {
-  swapTokens()
-}
+  swapTokens();
+};
 
 const handleSubmit = async (): Promise<void> => {
-  const transaction = await submitSwap()
+  const transaction = await submitSwap();
   if (transaction) {
-    lastTransaction.value = transaction
+    lastTransaction.value = transaction;
     // Clear the form after successful swap
     setTimeout(() => {
-      lastTransaction.value = null
-    }, 5000)
+      lastTransaction.value = null;
+    }, 5000);
   }
-}
+};
 </script>

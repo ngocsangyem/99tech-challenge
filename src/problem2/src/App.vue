@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import CurrencySwapForm from './components/CurrencySwapForm.vue'
-import ErrorBoundary from './components/ErrorBoundary.vue'
+import CurrencySwapForm from './components/CurrencySwapForm.vue';
+import ErrorBoundary from './components/ErrorBoundary.vue';
 </script>
 
 <template>

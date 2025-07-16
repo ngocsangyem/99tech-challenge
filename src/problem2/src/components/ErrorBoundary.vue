@@ -22,30 +22,30 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onErrorCaptured } from 'vue'
-import { AlertCircle, RefreshCw } from 'lucide-vue-next'
-import { Button } from '@/components/ui/button'
+import { ref, onErrorCaptured } from 'vue';
+import { AlertCircle, RefreshCw } from 'lucide-vue-next';
+import { Button } from '@/components/ui/button';
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
-} from '@/components/ui/card'
+} from '@/components/ui/card';
 
-const hasError = ref(false)
-const errorMessage = ref('')
+const hasError = ref(false);
+const errorMessage = ref('');
 
 onErrorCaptured((error) => {
-  hasError.value = true
-  errorMessage.value = error instanceof Error ? error.message : 'An unexpected error occurred'
-  return false
-})
+  hasError.value = true;
+  errorMessage.value = error instanceof Error ? error.message : 'An unexpected error occurred';
+  return false;
+});
 
 const retry = (): void => {
-  hasError.value = false
-  errorMessage.value = ''
+  hasError.value = false;
+  errorMessage.value = '';
   // Force a re-render by reloading the page
-  window.location.reload()
-}
+  window.location.reload();
+};
 </script>

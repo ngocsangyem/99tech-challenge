@@ -23,9 +23,9 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue'
-import { Button } from '@/components/ui/button'
-import { ArrowUpDown, Loader2 } from 'lucide-vue-next'
+import { computed } from 'vue';
+import { Button } from '@/components/ui/button';
+import { ArrowUpDown, Loader2 } from 'lucide-vue-next';
 
 type Props = {
   isLoading?: boolean
@@ -46,23 +46,23 @@ const props = withDefaults(defineProps<Props>(), {
   disabled: false,
   fromToken: null,
   toToken: null,
-})
+});
 
-defineEmits<Emits>()
+defineEmits<Emits>();
 
 const buttonText = computed(() => {
   if (props.isLoading) {
-    return 'Swapping...'
+    return 'Swapping...';
   }
 
   if (!props.fromToken || !props.toToken) {
-    return 'Select tokens'
+    return 'Select tokens';
   }
 
   if (!props.canSubmit) {
-    return 'Enter amount'
+    return 'Enter amount';
   }
 
-  return `Swap ${props.fromToken} to ${props.toToken}`
-})
+  return `Swap ${props.fromToken} to ${props.toToken}`;
+});
 </script>

@@ -8,7 +8,7 @@
 </template>
 
 <script setup lang="ts">
-import { Loader2 } from 'lucide-vue-next'
+import { Loader2 } from 'lucide-vue-next';
 
 type Props = {
   message?: string
@@ -16,5 +16,5 @@ type Props = {
 
 withDefaults(defineProps<Props>(), {
   message: 'Loading...',
-})
+});
 </script>

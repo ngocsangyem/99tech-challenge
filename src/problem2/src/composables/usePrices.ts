@@ -1,7 +1,7 @@
-import { computed } from 'vue'
-import { useFetch } from '@vueuse/core'
-import { calculateExchangeRate, convertAmount, getAvailableTokens } from '@/services/priceService'
-import type { PriceMap, ExchangeRate, PriceResponse, PriceData } from '@/types'
+import { computed } from 'vue';
+import { useFetch } from '@vueuse/core';
+import { calculateExchangeRate, convertAmount, getAvailableTokens } from '@/services/priceService';
+import type { PriceMap, ExchangeRate, PriceResponse, PriceData } from '@/types';
 
 export const usePrices = () => {
   const {
@@ -14,45 +14,45 @@ export const usePrices = () => {
     {
       immediate: true,
     }
-  ).json()
+  ).json();
 
   const priceMap = computed((): PriceMap => {
-    if (!priceData.value) return {}
+    if (!priceData.value) return {};
 
-    const map: Record<string, number> = {}
+    const map: Record<string, number> = {};
     priceData.value.forEach((priceItem: PriceData) => {
-      map[priceItem.currency] = priceItem.price
-    })
+      map[priceItem.currency] = priceItem.price;
+    });
 
-    return map
-  })
+    return map;
+  });
 
   const availableTokens = computed(() => {
-    return getAvailableTokens(priceMap.value)
-  })
+    return getAvailableTokens(priceMap.value);
+  });
 
   const getPrice = (symbol: string): number | null => {
-    return priceMap.value[symbol] || null
-  }
+    return priceMap.value[symbol] || null;
+  };
 
   const hasPrice = (symbol: string): boolean => {
-    return symbol in priceMap.value && priceMap.value[symbol] > 0
-  }
+    return symbol in priceMap.value && priceMap.value[symbol] > 0;
+  };
 
   const getExchangeRate = (fromSymbol: string, toSymbol: string): ExchangeRate | null => {
-    return calculateExchangeRate(priceMap.value, fromSymbol, toSymbol)
-  }
+    return calculateExchangeRate(priceMap.value, fromSymbol, toSymbol);
+  };
 
   const convert = (amount: number, fromSymbol: string, toSymbol: string): number | null => {
-    const exchangeRate = getExchangeRate(fromSymbol, toSymbol)
-    if (!exchangeRate) return null
+    const exchangeRate = getExchangeRate(fromSymbol, toSymbol);
+    if (!exchangeRate) return null;
 
-    return convertAmount(amount, exchangeRate)
-  }
+    return convertAmount(amount, exchangeRate);
+  };
 
   const canSwap = (fromSymbol: string, toSymbol: string): boolean => {
-    return hasPrice(fromSymbol) && hasPrice(toSymbol) && fromSymbol !== toSymbol
-  }
+    return hasPrice(fromSymbol) && hasPrice(toSymbol) && fromSymbol !== toSymbol;
+  };
 
   return {
     priceMap: computed(() => priceMap.value),
@@ -65,5 +65,5 @@ export const usePrices = () => {
     convert,
     canSwap,
     refetchPrices,
-  }
-}
+  };
+};

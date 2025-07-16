@@ -55,18 +55,18 @@
 </template>
 
 <script setup lang="ts">
-import { computed, ref } from 'vue'
-import { useTokens, usePrices } from '@/composables'
+import { computed, ref } from 'vue';
+import { useTokens, usePrices } from '@/composables';
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '@/components/ui/select'
-import { Input } from '@/components/ui/input'
-import { Label } from '@/components/ui/label'
-import type { TokenSymbol } from '@/types'
+} from '@/components/ui/select';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import type { TokenSymbol } from '@/types';
 
 type Props = {
   label: string
@@ -79,46 +79,46 @@ const props = withDefaults(defineProps<Props>(), {
   placeholder: 'Select a token',
   error: '',
   excludeToken: null,
-})
+});
 
-const model = defineModel<string | null>({ default: null })
+const model = defineModel<string | null>({ default: null });
 
-const { tokens, getToken } = useTokens()
-const { availableTokens } = usePrices()
+const { tokens, getToken } = useTokens();
+const { availableTokens } = usePrices();
 
-const searchQuery = ref('')
-const inputId = `currency-selector-${Math.random().toString(36).substring(2, 11)}`
+const searchQuery = ref();
+const inputId = `currency-selector-${Math.random().toString(36).substring(2, 11)}`;
 
 const selectedToken = computed(() => {
-  return model.value ? getToken(model.value) : null
-})
+  return model.value ? getToken(model.value) : null;
+});
 
 const filteredTokens = computed(() => {
-  const query = searchQuery.value.toLowerCase().trim()
+  const query = searchQuery.value.toLowerCase().trim();
 
   return tokens.value
     .filter((token) => {
       // Only show tokens that have prices
-      if (!availableTokens.value.includes(token.symbol)) return false
+      if (!availableTokens.value.includes(token.symbol)) return false;
 
       // Exclude the specified token
-      if (props.excludeToken && token.symbol === props.excludeToken) return false
+      if (props.excludeToken && token.symbol === props.excludeToken) return false;
 
       // Filter by search query
       if (query) {
         return (
           token.symbol.toLowerCase().includes(query) ||
           token.name.toLowerCase().includes(query)
-        )
+        );
       }
 
-      return true
+      return true;
     })
-    .sort((a, b) => a.symbol.localeCompare(b.symbol))
-})
+    .sort((a, b) => a.symbol.localeCompare(b.symbol));
+});
 
 const handleImageError = (event: Event): void => {
-  const img = event.target as HTMLImageElement
-  img.style.display = 'none'
-}
+  const img = event.target as HTMLImageElement;
+  img.style.display = 'none';
+};
 </script>

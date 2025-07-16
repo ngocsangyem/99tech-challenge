@@ -34,13 +34,13 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue'
-import { usePrices } from '@/composables'
-import { formatAmountInput, parseAmount, formatNumber } from '@/utils/calculations'
-import { cn } from '@/lib/utils'
-import { Input } from '@/components/ui/input'
-import { Label } from '@/components/ui/label'
-import type { TokenSymbol } from '@/types'
+import { computed } from 'vue';
+import { usePrices } from '@/composables';
+import { formatAmountInput, parseAmount, formatNumber } from '@/utils/calculations';
+import { cn } from '@/lib/utils';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import type { TokenSymbol } from '@/types';
 
 type Props = {
   label: string
@@ -55,37 +55,37 @@ const props = withDefaults(defineProps<Props>(), {
   error: '',
   readonly: false,
   tokenSymbol: null,
-})
+});
 
-const model = defineModel<string>()
+const model = defineModel<string>();
 
-const { getPrice } = usePrices()
+const { getPrice } = usePrices();
 
-const inputId = `amount-input-${Math.random().toString(36).substring(2, 11)}`
+const inputId = `amount-input-${Math.random().toString(36).substring(2, 11)}`;
 
 const usdValue = computed(() => {
-  if (!props.tokenSymbol || !model.value) return null
+  if (!props.tokenSymbol || !model.value) return null;
 
-  const amount = parseAmount(model.value)
-  const price = getPrice(props.tokenSymbol)
+  const amount = parseAmount(model.value);
+  const price = getPrice(props.tokenSymbol);
 
-  if (amount <= 0 || !price) return null
+  if (amount <= 0 || !price) return null;
 
-  return amount * price
-})
+  return amount * price;
+});
 
 const handleInput = (event: Event): void => {
-  const target = event.target as HTMLInputElement
-  const formatted = formatAmountInput(target.value)
-  model.value = formatted
-}
+  const target = event.target as HTMLInputElement;
+  const formatted = formatAmountInput(target.value);
+  model.value = formatted;
+};
 
 const handleBlur = (): void => {
-  if (!model.value) return
+  if (!model.value) return;
 
-  const amount = parseAmount(model.value)
+  const amount = parseAmount(model.value);
   if (amount > 0) {
-    model.value = formatNumber(amount, 8)
+    model.value = formatNumber(amount, 8);
   }
-}
+};
 </script>
