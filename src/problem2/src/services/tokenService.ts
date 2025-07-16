@@ -32,5 +32,9 @@ export const fetchTokenList = async (): Promise<TokenList> => {
 };
 
 export const getTokenBySymbol = (tokens: TokenList, symbol: string): Token | undefined => {
-  return tokens.find((token) => token.symbol.toLowerCase() === symbol.toLowerCase());
+  if (!symbol || !tokens) return undefined;
+
+  return tokens.find((token) =>
+    token?.symbol?.toLowerCase() === symbol.toLowerCase()
+  );
 };

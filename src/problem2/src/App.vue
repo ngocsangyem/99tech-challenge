@@ -1,10 +1,16 @@
 <script setup lang="ts">
 import CurrencySwapForm from './components/CurrencySwapForm.vue';
 import ErrorBoundary from './components/ErrorBoundary.vue';
+import ThemeToggle from './components/ThemeToggle.vue';
 </script>
 
 <template>
   <div class="min-h-screen bg-gradient-to-br from-background to-muted/20 p-4">
+    <!-- Theme Toggle - Fixed position in top right -->
+    <div class="fixed top-4 right-4 z-50">
+      <ThemeToggle />
+    </div>
+
     <div class="container mx-auto py-8 max-w-2xl">
       <div class="text-center mb-8">
         <h1 class="text-3xl md:text-4xl font-bold text-foreground mb-2">
