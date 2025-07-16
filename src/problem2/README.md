@@ -2,6 +2,8 @@
 
 A modern, responsive currency swap application built with Vue 3, TypeScript, and Tailwind CSS.
 
+> Live demo [here](https://currency-swap-7jc56dhvh-sagsaggs-projects.vercel.app/)
+
 ## Features
 
 - **Real-time Token Data**: Fetches token list from Switcheo's GitHub repository
