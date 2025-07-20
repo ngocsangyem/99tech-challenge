@@ -20,3 +20,5 @@ We're cool as long as we can view your solution without any pain.
 
 ### Problem 3
 - See the [README.md](./src/problem3/README.md)
+
+> For more details, please read the [wiki](https://github.com/ngocsangyem/99tech-challenge/wiki)
